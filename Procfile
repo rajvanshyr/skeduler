@@ -1,2 +1,2 @@
 web: gunicorn app:app --log-file=-
-release: ./manage.py migrate --no-input
+#release: ./manage.py migrate --no-input
