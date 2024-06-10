@@ -1,13 +1,3581 @@
-<!DOCTYPE html>
-<html lang="en">
+<html class="MktRoot" lang="en-IN" style="--scrollbarWidth: 17px">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
     <title>Profile</title>
+
+    <link rel="stylesheet" href="../static/css/home.css" media="all" data-js-lazy-style="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        body {
+          
+          background: linear-gradient(120deg, #2980b9, #8e44ad);
+         
+       
+       
+
+        }
+
+        .profile-header-background{
+            background: linear-gradient( 120deg, #b929a1 0%, #5444ad 25%, #2bd5ff 50%, #ff8a41 75%) !important;
+        }
+
+        .button-contain{
+            display: flex;
+            justify-content: space-between;
+            margin: 25px 0px 10px 0px;
+        }
+
+        .button-contain .forgot{
+            background: none;
+            border: none;
+        }
+
+        .button-contain .help{
+            background-color: #80e9ff;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 12px 24px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+        }
+  
+        .profile-container {
+          background-color: #fff;
+          border-radius: 10px;
+          box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25),
+            0 10px 10px rgba(0, 0, 0, 0.22);
+          width: 400px;
+          max-width: 100%;
+          padding: 30px;
+          text-align: center;
+         margin: 100px auto;
+        }
+  
+        .profile-image {
+          background-color: #ccc;
+          border-radius: 50%;
+          width: 100px;
+          height: 100px;
+          margin: 0 auto 20px auto;
+        }
+  
+        .credits {
+          font-size: 18px;
+          margin: 10px 0;
+        }
+  
+        .buy-credits {
+    
+          border: 1px solid #7A73FF;
+          background-color: #7A73FF;
+          color: #ffffff;
+          font-size: 12px;
+          font-weight: bold;
+          padding: 12px 24px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          cursor: pointer;
+          margin-bottom: 20px;
+        }
+  
+        .history-container {
+          border-top: 1px solid #ccc;
+          margin-top: 20px;
+          padding-top: 20px;
+        }
+  
+        .history-item {
+          background-color: #f5f5f5;
+          border-radius: 5px;
+          padding: 10px;
+          margin-bottom: 10px;
+        }
+  
+        .view-full-history {
+          
+          border: 1px solid #7A73FF;
+          background-color: #7A73FF;
+          color: #ffffff;
+          font-size: 12px;
+          font-weight: bold;
+          padding: 12px 24px;
+          letter-spacing: 1px;
+          text-transform: uppercase;
+          cursor: pointer;
+          margin-top: 10px;
+        }
+  
+        .modal {
+          display: none;
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.6);
+          justify-content: center;
+          align-items: center;
+          z-index: 3;
+        }
+  
+        .modal-content {
+          background-color: #fff;
+          border-radius: 10px;
+          padding: 20px;
+          width: 500px;
+          max-width: 80%;
+          text-align: left;
+        }
+  
+        .close-modal {
+          float: right;
+          font-size: 20px;
+          cursor: pointer;
+        }
+      </style>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        .video-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient( 135deg, rgba(255, 126, 95, 0.8), rgba(254, 180, 123, 0.8));
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-shadow: 0 -10px 20px rgba(0, 0, 0, 0.5);
+            transform: translateY(100%);
+            transition: transform 0.5s ease-in-out;
+            z-index: 1000;
+        }
+        
+        .video-container.show {
+            transform: translateY(0);
+        }
+        
+        .video-wrapper {
+            width: 80%;
+            max-width: 800px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+        
+        .video-wrapper iframe {
+            width: 100%;
+            height: 450px;
+            border: none;
+        }
+        
+        .show-video-button {
+            position: fixed;
+            bottom: 50px;
+            right: 50px;
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 1001;
+        }
+        
+        .show-video-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            z-index: -1;
+        }
+        
+        body.show-video::before {
+            opacity: 1;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+        
+        .menu-container {
+            position: relative;
+            text-align: right;
+            padding: 10px;
+            background-color: linear-gradient( 120deg, #2980b9 0%, #8e44ad 25%, #ff4b2b 50%, #ff416c 75%);
+        }
+        
+        .menu-button {
+            background-color: linear-gradient( 120deg, #2980b9 0%, #8e44ad 25%, #ff4b2b 50%, #ff416c 75%);
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .popup-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .popup-menu-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 300px;
+            padding: 20px;
+            text-align: center;
+            animation: slideDown 0.3s ease;
+            position: relative;
+        }
+        
+        .popup-menu a {
+            display: block;
+            padding: 10px 15px;
+            color: black;
+            text-decoration: none;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .popup-menu a:hover {
+            background-color: #f1f1f1;
+        }
+        
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            color: #333;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        @media (min-width: 600px) {
+            .popup-menu {
+                display: none;
+            }
+            
+            
+        }
+    </style>
+
 </head>
 
-<body>
-</body>
+<body class="MktBody theme--Light flavor--Chroma accent--Blurple has-scrollbar" data-js-controller="Homepage">
+    <div id="MktContent">
+        <header class="SiteHeader SiteHeader--noTransitions SiteHeader--hasContactSales theme--Transparent variant--Overlay SiteHeader--hasGuides profile-header-background" data-js-controller="SiteHeader" data-experiment-id="acquisition_sticky_nav">
+            <div class="SiteHeader__stickyContainer" data-js-target="SiteHeader.stickyContainerEl">
+                <div class="SiteHeader__stickyShadow" data-js-target="SiteHeader.stickyShadowEl"></div>
 
+                <div class="SiteHeader__guidesContainer">
+                    <div class="Guides SiteHeader__guides" aria-hidden="true">
+                        <div class="Guides__container">
+                            <div class="Guides__guide"></div>
+                            <div class="Guides__guide"></div>
+                            <div class="Guides__guide"></div>
+                            <div class="Guides__guide"></div>
+                            <div class="Guides__guide"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="SiteHeader__container">
+                    <div class="SiteHeader__navContainer">
+                        <h1 class="SiteHeader__logo">
+                            <a href="#" class="SiteHeader__logoLink">
+                  Home
+                  
+                </a>
+                        </h1>
+
+                        <nav class="SiteHeaderNav">
+                            <!-- <ul class="SiteHeaderNav__list">
+                  <li class="SiteHeaderNavItem">
+                    <button
+                      class="SiteHeaderNavItem__link"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      data-js-target-list="SiteHeader.dropdownTriggers"
+                      data-testid="header-products-nav-item"
+                    >
+                      Products
+                    </button>
+                  </li>
+                  <li class="SiteHeaderNavItem">
+                    <button
+                      class="SiteHeaderNavItem__link"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      data-js-target-list="SiteHeader.dropdownTriggers"
+                      data-testid="header-solutions-nav-item"
+                    >
+                      Solutions
+                    </button>
+                  </li>
+                  <li class="SiteHeaderNavItem">
+                    <button
+                      class="SiteHeaderNavItem__link"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      data-js-target-list="SiteHeader.dropdownTriggers"
+                      data-testid="header-developers-nav-item"
+                    >
+                      Developers
+                    </button>
+                  </li>
+                  <li class="SiteHeaderNavItem">
+                    <button
+                      class="SiteHeaderNavItem__link"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      data-js-target-list="SiteHeader.dropdownTriggers"
+                      data-testid="header-resources-nav-item"
+                    >
+                      Resources
+                    </button>
+                  </li>
+                  <li class="SiteHeaderNavItem">
+                    <a class="Link SiteHeaderNavItem__link" href="#">Pricing</a>
+                  </li>
+                </ul> -->
+                        </nav>
+
+                        <nav class="SiteHeader__ctaNav" data-js-target="SiteHeader.ctaNavEl">
+                            <div class="SiteHeader__ctaNavContainer" data-js-target="SiteHeader.ctaNavContainerEl">
+                                <p class="CtaButton variant--Link CtaButton--arrow SiteHeader__contactSalesLink" href="#">Contact&nbsp;<svg class="HoverArrow" width="10" height="10" viewBox="0 0 10 10" aria-hidden="true">
+                      <g fill-rule="evenodd">
+                        <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                        <path
+                          class="HoverArrow__tipPath"
+                          d="M1 1l4 4-4 4"
+                        ></path>
+                      </g></svg
+                  ></p>
+                  <div
+                    class="DashboardLoginButtonGradient"
+                    data-js-target="Homepage.gradientLoginButton"
+                  >
+                    <div class="DashboardLoginButton__container">
+                      
+                      <a
+                        class="CtaButton variant--Button CtaButton--arrow DashboardLoginButton_ctaButton"
+                        href="/Log-out"
+                        >
+                        {% if current_user.is_authenticated %}
+                        <span
+                          class="DashboardLoginButton__label"
+                          style="
+                            background: linear-gradient(
+                              90deg,
+                              rgb(142, 34, 199) 0%,
+                              rgb(148, 15, 188) 100%
+                            );
+                          "
+                          >Log out</span
+                        >
+                        {% else %}
+                        <span
+                          class="DashboardLoginButton__label"
+                          style="
+                            background: linear-gradient(
+                              90deg,
+                              rgb(142, 34, 199) 0%,
+                              rgb(148, 15, 188) 100%
+                            );
+                          "
+                          >Sign in</span
+                        >
+                        {% endif %}&nbsp;<svg
+                          class="HoverArrow"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          aria-hidden="true"
+                          style="stroke: rgb(148, 15, 188)"
+                        >
+                          <g fill-rule="evenodd">
+                            <path
+                              class="HoverArrow__linePath"
+                              d="M0 5h7"
+                            ></path>
+                            <path
+                              class="HoverArrow__tipPath"
+                              d="M1 1l4 4-4 4"
+                            ></path>
+                          </g></svg
+                      ></a>
+                    </div>
+
+                    <!-- <template
+                      data-mount-target=".DashboardLoginButton__container"
+                      data-mount-on-state="logged-in"
+                    >
+                      <a
+                        class="CtaButton variant--Button CtaButton--arrow DashboardLoginButton_ctaButton"
+                        href="#"
+                        ><span class="DashboardLoginButton__label"
+                          >Dashboard</span
+                        >&nbsp;<svg
+                          class="HoverArrow"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          aria-hidden="true"
+                        >
+                          <g fill-rule="evenodd">
+                            <path
+                              class="HoverArrow__linePath"
+                              d="M0 5h7"
+                            ></path>
+                            <path
+                              class="HoverArrow__tipPath"
+                              d="M1 1l4 4-4 4"
+                            ></path>
+                          </g></svg
+                      ></a>
+                    </template> -->
+                    <!-- <template
+                      data-mount-target=".DashboardLoginButton__container"
+                      data-mount-on-state="logged-out-existing"
+                    >
+                      <a
+                        class="CtaButton variant--Button CtaButton--arrow DashboardLoginButton_ctaButton"
+                        href="#"
+                        ><span class="DashboardLoginButton__label">Sign in</span
+                        >&nbsp;<svg
+                          class="HoverArrow"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          aria-hidden="true"
+                        >
+                          <g fill-rule="evenodd">
+                            <path
+                              class="HoverArrow__linePath"
+                              d="M0 5h7"
+                            ></path>
+                            <path
+                              class="HoverArrow__tipPath"
+                              d="M1 1l4 4-4 4"
+                            ></path>
+                          </g></svg
+                      ></a>
+                    </template> -->
+                    <!-- <template
+                      data-mount-target=".DashboardLoginButton__container"
+                      data-mount-on-state="logged-out-new"
+                    >
+                      <a
+                        class="CtaButton variant--Button CtaButton--arrow DashboardLoginButton_ctaButton"
+                        href="#"
+                        ><span class="DashboardLoginButton__label">Sign in</span
+                        >&nbsp;<svg
+                          class="HoverArrow"
+                          width="10"
+                          height="10"
+                          viewBox="0 0 10 10"
+                          aria-hidden="true"
+                        >
+                          <g fill-rule="evenodd">
+                            <path
+                              class="HoverArrow__linePath"
+                              d="M0 5h7"
+                            ></path>
+                            <path
+                              class="HoverArrow__tipPath"
+                              d="M1 1l4 4-4 4"
+                            ></path>
+                          </g></svg
+                      ></a>
+                    </template> -->
+                  </div>
+                </div>
+              </nav>
+
+              <nav class="SiteHeader__menuNav">
+                <div class="menu-container">
+                  <a class="Menu-button" onclick="toggleMenu()"><svg width="16" height="10" viewBox="0 0 16 10">
+                    <title>Open mobile navigation</title>
+                    <g fill="var(--knockoutColor)" fill-rule="evenodd">
+                      <rect y="8" width="16" height="2" rx="1"></rect>
+                      <rect y="4" width="16" height="2" rx="1"></rect>
+                      <rect width="16" height="2" rx="1"></rect>
+                    </g>
+                  </svg></a>
+                            </div>
+                            <div class="popup-menu" id="popupMenu">
+                                <div class="popup-menu-card">
+                                    <button class="close-button" onclick="toggleMenu()">&times;</button>
+                                    <a href="#home">Home</a>
+                                    <a href="/Sign-on">Sign in&nbsp;<svg
+                        class="HoverArrow"
+                        width="10"
+                        height="10"
+                        viewBox="0 0 10 10"
+                        aria-hidden="true"
+                      >
+                        <g fill-rule="evenodd">
+                          <path
+                            class="HoverArrow__linePath"
+                            d="M0 5h7"
+                          ></path>
+                          <path
+                            class="HoverArrow__tipPath"
+                            d="M1 1l4 4-4 4"
+                          ></path>
+                        </g></svg
+                    ></a>
+                                    <a href="#contact">Contact</a>
+                                </div>
+                            </div>
+
+                            <script>
+                                function toggleMenu() {
+                                    var popupMenu = document.getElementById('popupMenu');
+                                    if (popupMenu.style.display === 'flex') {
+                                        popupMenu.style.display = 'none';
+                                    } else {
+                                        popupMenu.style.display = 'flex';
+                                    }
+                                }
+
+                                // Close the popup menu when clicking outside of it
+                                window.onclick = function(event) {
+                                    var popupMenu = document.getElementById('popupMenu');
+                                    if (event.target == popupMenu) {
+                                        popupMenu.style.display = 'none';
+                                    }
+                                }
+                            </script>
+                            <!-- <a class="MenuButton menubutton" onclick="togleMenu()">
+                  <svg width="16" height="10" viewBox="0 0 16 10">
+                    <title>Open mobile navigation</title>
+                    <g fill="var(--knockoutColor)" fill-rule="evenodd">
+                      <rect y="8" width="16" height="2" rx="1"></rect>
+                      <rect y="4" width="16" height="2" rx="1"></rect>
+                      <rect width="16" height="2" rx="1"></rect>
+                    </g>
+                  </svg>
+                </a> -->
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- <div
+            class="SiteHeader__tabletOverlay"
+            data-js-target="SiteHeader.tabletOverlay"
+          ></div> -->
+                <div class="SiteHeader__mobileMenuMask" data-js-target="SiteHeader.mobileMenuMask">
+                    <!-- 
+mobile menu goes here -->
+
+
+                </div>
+        </header>
+
+
+        <!-- <div
+        class="StickySiteHeaderExperimentControl"
+        data-js-controller="StickySiteHeaderExperimentControl"
+        data-experiment-id="acquisition_sticky_nav"
+      ></div> -->
+
+      <div class="profile-container">
+        <div class="profile-image"></div>
+        <div class="credits">Credits: <span id="credits">100</span></div>
+        <button class="buy-credits" onclick="buyCredits()">
+          Buy More Credits
+        </button>
+  
+        <div class="history-container">
+          <div class="history-item">History Item 1</div>
+          <div class="history-item">History Item 2</div>
+          <div class="history-item">History Item 3</div>
+          <button class="view-full-history" onclick="showFullHistory()">
+            View Full History
+          </button>
+        </div>
+
+<div class="button-contain">
+
+<button class="forgot"><a href="#" >Forgot Password</a></button>
+<button class="help"><a href="#" >Help</a></button>
+</div>
+
+      </div>
+  
+      <div class="modal" id="modal">
+        <div class="modal-content">
+          <span class="close-modal" onclick="closeModal()">&times;</span>
+          <h2>Full History</h2>
+          <div class="history-item">Full History Item 1</div>
+          <div class="history-item">Full History Item 2</div>
+          <div class="history-item">Full History Item 3</div>
+          <div class="history-item">Full History Item 4</div>
+          <div class="history-item">Full History Item 5</div>
+        </div>
+      </div>
+  
+      <script>
+        function buyCredits() {
+          // Placeholder function for buying credits
+          alert("Buy credits functionality to be implemented.");
+        }
+  
+        function showFullHistory() {
+          document.getElementById("modal").style.display = "flex";
+        }
+  
+        function closeModal() {
+          document.getElementById("modal").style.display = "none";
+        }
+      </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       
+
+        
+       
+      
+      
+            
+                        
+                        <footer class="Section SiteFooterSection theme--White flavor--Chroma accent--Slate Section--angleTop Section--paddingNormal Section--hasGuides Section--hasStickyNav">
+                            <div class="Section__masked">
+                                <div class="Section__backgroundMask">
+                                    <div class="Section__background">
+                                        <div class="Guides" aria-hidden="true">
+                                            <div class="Guides__container">
+                                                <div class="Guides__guide"></div>
+                                                <div class="Guides__guide"></div>
+                                                <div class="Guides__guide"></div>
+                                                <div class="Guides__guide"></div>
+                                                <div class="Guides__guide"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="Section__container">
+                                    <div class="Section__layoutContainer">
+                                        <div class="Section__layout">
+                                            <nav class="SiteFooterSection__layout">
+                                                <div class="SiteFooterSection__column--locale SiteFooterSection__column">
+                                                    <div class="SiteFooterSection__localeContainer">
+                                                        <div class="SiteFooterSection__logo">
+                                                            <a class="SiteFooterSection__logoLink" href="#" data-js-controller="AnalyticsButton" data-analytics-category="Navigation" data-analytics-action="Clicked" data-analytics-label="class Logo" aria-label="Go to the class homepage" data-testid="footer-class-logo">
+                                                                <!-- <svg
+                            viewBox="0 0 60 25"
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="60"
+                            height="25"
+                            class="UserLogo variant--"
+                          >
+                            <title>class logo</title>
+                            <path
+                              fill="var(--userLogoColor, #0A2540)"
+                              d="M59.64 14.28h-8.06c.19 1.93 1.6 2.55 3.2 2.55 1.64 0 2.96-.37 4.05-.95v3.32a8.33 8.33 0 0 1-4.56 1.1c-4.01 0-6.83-2.5-6.83-7.48 0-4.19 2.39-7.52 6.3-7.52 3.92 0 5.96 3.28 5.96 7.5 0 .4-.04 1.26-.06 1.48zm-5.92-5.62c-1.03 0-2.17.73-2.17 2.58h4.25c0-1.85-1.07-2.58-2.08-2.58zM40.95 20.3c-1.44 0-2.32-.6-2.9-1.04l-.02 4.63-4.12.87V5.57h3.76l.08 1.02a4.7 4.7 0 0 1 3.23-1.29c2.9 0 5.62 2.6 5.62 7.4 0 5.23-2.7 7.6-5.65 7.6zM40 8.95c-.95 0-1.54.34-1.97.81l.02 6.12c.4.44.98.78 1.95.78 1.52 0 2.54-1.65 2.54-3.87 0-2.15-1.04-3.84-2.54-3.84zM28.24 5.57h4.13v14.44h-4.13V5.57zm0-4.7L32.37 0v3.36l-4.13.88V.88zm-4.32 9.35v9.79H19.8V5.57h3.7l.12 1.22c1-1.77 3.07-1.41 3.62-1.22v3.79c-.52-.17-2.29-.43-3.32.86zm-8.55 4.72c0 2.43 2.6 1.68 3.12 1.46v3.36c-.55.3-1.54.54-2.89.54a4.15 4.15 0 0 1-4.27-4.24l.01-13.17 4.02-.86v3.54h3.14V9.1h-3.13v5.85zm-4.91.7c0 2.97-2.31 4.66-5.73 4.66a11.2 11.2 0 0 1-4.46-.93v-3.93c1.38.75 3.1 1.31 4.46 1.31.92 0 1.53-.24 1.53-1C6.26 13.77 0 14.51 0 9.95 0 7.04 2.28 5.3 5.62 5.3c1.36 0 2.72.2 4.09.75v3.88a9.23 9.23 0 0 0-4.1-1.06c-.86 0-1.44.25-1.44.9 0 1.85 6.29.97 6.29 5.88z"
+                              fill-rule="evenodd"
+                            ></path>
+                          </svg> -->
+                                                            </a>
+                                                        </div>
+
+                                                        <div class="SiteFooterSection__localeControls">
+                                                            <div class="LocaleControl" data-js-controller="LocaleControl">
+                                                                <!-- <button
+                            class="LocaleControl__trigger"
+                            data-js-target="LocaleControl.trigger"
+                            aria-label="India. Choose your country"
+                            data-testid="footer-locale-button"
+                            aria-expanded="false"
+                          >
+                            <svg
+                              class="LocaleControl__triggerIcon"
+                              width="16"
+                              height="16"
+                              viewBox="0 0 16 16"
+                            >
+                              <path
+                                d="M3.54 8.04h4.42v4.43c0 .57.76.75 1.01.24l4.96-9.93a.54.54 0 0 0-.72-.72L3.3 7.03c-.5.25-.33 1.01.24 1.01"
+                                fill="#0A2540"
+                                fill-rule="evenodd"
+                              ></path>
+                            </svg>
+
+                            <span data-js-target="LocaleControl.triggerLabel"
+                              >India (English)</span
+                            >
+                          </button> -->
+
+                                                                <div class="LocaleControl__popup" data-js-target="LocaleControl.popup" aria-hidden="true">
+                                                                    <section class="GlobalizationPicker">
+                                                                        <div class="GlobalizationPicker__body">
+                                                                            <ul class="GlobalizationPicker__countryList">
+                                                                                <li class="GlobalizationPicker__countryListItem">
+                                                                                    <img class="Flag Flag--countryAU GlobalizationPicker__countryFlagIcon" src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg" alt="AU" loading="lazy" />
+
+                                                                                    <span class="GlobalizationPicker__country">Australia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-AU-en-GB-link"
+                                          data-country-code="AU"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Australia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryAT GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="AT"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Austria</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Deutsch"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-AT-de-link"
+                                          data-country-code="AT"
+                                          data-language-code="de"
+                                          data-globalization-active="false"
+                                          data-display-name="Austria (Deutsch)"
+                                          tabindex="-1"
+                                          >Deutsch</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-AT-en-GB-link"
+                                          data-country-code="AT"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Austria (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryBE GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="BE"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Belgium</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Nederlands"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BE-nl-link"
+                                          data-country-code="BE"
+                                          data-language-code="nl"
+                                          data-globalization-active="false"
+                                          data-display-name="Belgium (Nederlands)"
+                                          tabindex="-1"
+                                          >Nederlands</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Français"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BE-fr-link"
+                                          data-country-code="BE"
+                                          data-language-code="fr"
+                                          data-globalization-active="false"
+                                          data-display-name="Belgium (Français)"
+                                          tabindex="-1"
+                                          >Français</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Deutsch"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BE-de-link"
+                                          data-country-code="BE"
+                                          data-language-code="de"
+                                          data-globalization-active="false"
+                                          data-display-name="Belgium (Deutsch)"
+                                          tabindex="-1"
+                                          >Deutsch</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BE-en-GB-link"
+                                          data-country-code="BE"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Belgium (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryBR GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="BR"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Brazil</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Português"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BR-pt-BR-link"
+                                          data-country-code="BR"
+                                          data-language-code="pt-BR"
+                                          data-globalization-active="false"
+                                          data-display-name="Brazil (Português)"
+                                          tabindex="-1"
+                                          >Português</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BR-en-link"
+                                          data-country-code="BR"
+                                          data-language-code="en"
+                                          data-globalization-active="false"
+                                          data-display-name="Brazil (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryBG GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="BG"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Bulgaria</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-BG-en-GB-link"
+                                          data-country-code="BG"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Bulgaria (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryCA GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="CA"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Canada</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CA-en-GB-link"
+                                          data-country-code="CA"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Canada (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Français"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CA-fr-CA-link"
+                                          data-country-code="CA"
+                                          data-language-code="fr-CA"
+                                          data-globalization-active="false"
+                                          data-display-name="Canada (Français)"
+                                          tabindex="-1"
+                                          >Français</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryHR GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="HR"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Croatia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-HR-en-GB-link"
+                                          data-country-code="HR"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Croatia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Italiano"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-HR-it-link"
+                                          data-country-code="HR"
+                                          data-language-code="it"
+                                          data-globalization-active="false"
+                                          data-display-name="Croatia (Italiano)"
+                                          tabindex="-1"
+                                          >Italiano</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryCY GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="CY"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Cyprus</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CY-en-GB-link"
+                                          data-country-code="CY"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Cyprus (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryCZ GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="CZ"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Czech Republic</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CZ-en-GB-link"
+                                          data-country-code="CZ"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Czech Republic (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryDK GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="DK"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Denmark</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-DK-en-GB-link"
+                                          data-country-code="DK"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Denmark (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryEE GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="EE"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Estonia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-EE-en-GB-link"
+                                          data-country-code="EE"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Estonia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryFI GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="FI"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Finland</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-FI-en-GB-link"
+                                          data-country-code="FI"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Finland (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Svenska"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-FI-sv-link"
+                                          data-country-code="FI"
+                                          data-language-code="sv"
+                                          data-globalization-active="false"
+                                          data-display-name="Finland (Svenska)"
+                                          tabindex="-1"
+                                          >Svenska</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="GlobalizationPicker__countryList">
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryFR GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="FR"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >France</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Français"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-FR-fr-link"
+                                          data-country-code="FR"
+                                          data-language-code="fr"
+                                          data-globalization-active="false"
+                                          data-display-name="France (Français)"
+                                          tabindex="-1"
+                                          >Français</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-FR-en-GB-link"
+                                          data-country-code="FR"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="France (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryDE GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="DE"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Germany</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Deutsch"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-DE-de-link"
+                                          data-country-code="DE"
+                                          data-language-code="de"
+                                          data-globalization-active="false"
+                                          data-display-name="Germany (Deutsch)"
+                                          tabindex="-1"
+                                          >Deutsch</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-DE-en-GB-link"
+                                          data-country-code="DE"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Germany (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryGI GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="GI"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Gibraltar</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-GI-en-GB-link"
+                                          data-country-code="GI"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Gibraltar (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryGR GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="GR"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Greece</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-gr"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-GR-en-GB-link"
+                                          data-country-code="GR"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Greece (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryHK GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="HK"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Hong Kong</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-hk"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-HK-en-GB-link"
+                                          data-country-code="HK"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Hong Kong (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/zh-hk"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="简体中文"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-HK-zh-CN-link"
+                                          data-country-code="HK"
+                                          data-language-code="zh-CN"
+                                          data-globalization-active="false"
+                                          data-display-name="Hong Kong (简体中文)"
+                                          tabindex="-1"
+                                          >简体中文</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryHU GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="HU"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Hungary</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-hu"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-HU-en-GB-link"
+                                          data-country-code="HU"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Hungary (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <svg
+                                      class="GlobalizationPicker__countryCheckIcon"
+                                      width="16"
+                                      height="16"
+                                      viewBox="0 0 16 16"
+                                    >
+                                      <path
+                                        d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm3.41 4.93L6.64 9.54 5.38 8.18a.7.7 0 0 0-.87-.04.61.61 0 0 0-.18.8l1.5 2.45c.15.22.41.36.69.36.28 0 .53-.14.68-.36.24-.31 4.82-5.78 4.82-5.78.6-.6-.13-1.15-.6-.68z"
+                                        fill="var(--accentColor)"
+                                        fill-rule="evenodd"
+                                      ></path>
+                                    </svg>
+
+                                    <span class="GlobalizationPicker__country"
+                                      >India</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem GlobalizationPicker__countryLanguageListItem--active"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/in"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-IN-en-GB-link"
+                                          data-country-code="IN"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="true"
+                                          data-display-name="India (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryIE GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="IE"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Ireland</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/ie"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-IE-en-GB-link"
+                                          data-country-code="IE"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Ireland (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryIT GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="IT"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Italy</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/it"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Italiano"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-IT-it-link"
+                                          data-country-code="IT"
+                                          data-language-code="it"
+                                          data-globalization-active="false"
+                                          data-display-name="Italy (Italiano)"
+                                          tabindex="-1"
+                                          >Italiano</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-it"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-IT-en-GB-link"
+                                          data-country-code="IT"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Italy (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryJP GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="JP"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Japan</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/jp"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="日本語"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-JP-ja-link"
+                                          data-country-code="JP"
+                                          data-language-code="ja"
+                                          data-globalization-active="false"
+                                          data-display-name="Japan (日本語)"
+                                          tabindex="-1"
+                                          >日本語</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-jp"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-JP-en-link"
+                                          data-country-code="JP"
+                                          data-language-code="en"
+                                          data-globalization-active="false"
+                                          data-display-name="Japan (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryLV GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="LV"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Latvia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-lv"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LV-en-GB-link"
+                                          data-country-code="LV"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Latvia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryLI GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="LI"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Liechtenstein</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/de-li"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Deutsch"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LI-de-link"
+                                          data-country-code="LI"
+                                          data-language-code="de"
+                                          data-globalization-active="false"
+                                          data-display-name="Liechtenstein (Deutsch)"
+                                          tabindex="-1"
+                                          >Deutsch</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-li"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LI-en-GB-link"
+                                          data-country-code="LI"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Liechtenstein (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="GlobalizationPicker__countryList">
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryLT GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="LT"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Lithuania</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-lt"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LT-en-GB-link"
+                                          data-country-code="LT"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Lithuania (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryLU GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="LU"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Luxembourg</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/fr-lu"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Français"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LU-fr-link"
+                                          data-country-code="LU"
+                                          data-language-code="fr"
+                                          data-globalization-active="false"
+                                          data-display-name="Luxembourg (Français)"
+                                          tabindex="-1"
+                                          >Français</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/de-lu"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Deutsch"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LU-de-link"
+                                          data-country-code="LU"
+                                          data-language-code="de"
+                                          data-globalization-active="false"
+                                          data-display-name="Luxembourg (Deutsch)"
+                                          tabindex="-1"
+                                          >Deutsch</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-lu"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-LU-en-GB-link"
+                                          data-country-code="LU"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Luxembourg (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryMY GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="MY"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Malaysia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-my"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-MY-en-GB-link"
+                                          data-country-code="MY"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Malaysia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/zh-my"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="简体中文"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-MY-zh-CN-link"
+                                          data-country-code="MY"
+                                          data-language-code="zh-CN"
+                                          data-globalization-active="false"
+                                          data-display-name="Malaysia (简体中文)"
+                                          tabindex="-1"
+                                          >简体中文</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryMT GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="MT"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Malta</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-mt"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-MT-en-GB-link"
+                                          data-country-code="MT"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Malta (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryMX GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="MX"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Mexico</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/mx"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Español"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-MX-es-419-link"
+                                          data-country-code="MX"
+                                          data-language-code="es-419"
+                                          data-globalization-active="false"
+                                          data-display-name="Mexico (Español)"
+                                          tabindex="-1"
+                                          >Español</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-mx"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-MX-en-link"
+                                          data-country-code="MX"
+                                          data-language-code="en"
+                                          data-globalization-active="false"
+                                          data-display-name="Mexico (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryNL GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="NL"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Netherlands</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/nl"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Nederlands"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-NL-nl-link"
+                                          data-country-code="NL"
+                                          data-language-code="nl"
+                                          data-globalization-active="false"
+                                          data-display-name="Netherlands (Nederlands)"
+                                          tabindex="-1"
+                                          >Nederlands</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-nl"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-NL-en-GB-link"
+                                          data-country-code="NL"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Netherlands (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryNZ GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="NZ"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >New Zealand</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/nz"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-NZ-en-GB-link"
+                                          data-country-code="NZ"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="New Zealand (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryNO GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="NO"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Norway</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-no"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-NO-en-GB-link"
+                                          data-country-code="NO"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Norway (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryPL GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="PL"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Poland</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-PL-en-GB-link"
+                                          data-country-code="PL"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Poland (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryPT GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="PT"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Portugal</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Português"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-PT-pt-BR-link"
+                                          data-country-code="PT"
+                                          data-language-code="pt-BR"
+                                          data-globalization-active="false"
+                                          data-display-name="Portugal (Português)"
+                                          tabindex="-1"
+                                          >Português</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-PT-en-GB-link"
+                                          data-country-code="PT"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Portugal (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryRO GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="RO"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Romania</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-RO-en-GB-link"
+                                          data-country-code="RO"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Romania (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countrySG GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="SG"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Singapore</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SG-en-link"
+                                          data-country-code="SG"
+                                          data-language-code="en"
+                                          data-globalization-active="false"
+                                          data-display-name="Singapore (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="简体中文"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SG-zh-CN-link"
+                                          data-country-code="SG"
+                                          data-language-code="zh-CN"
+                                          data-globalization-active="false"
+                                          data-display-name="Singapore (简体中文)"
+                                          tabindex="-1"
+                                          >简体中文</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                                <ul class="GlobalizationPicker__countryList">
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countrySK GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="SK"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Slovakia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SK-en-GB-link"
+                                          data-country-code="SK"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Slovakia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countrySI GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="SI"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Slovenia</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SI-en-GB-link"
+                                          data-country-code="SI"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Slovenia (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Italiano"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SI-it-link"
+                                          data-country-code="SI"
+                                          data-language-code="it"
+                                          data-globalization-active="false"
+                                          data-display-name="Slovenia (Italiano)"
+                                          tabindex="-1"
+                                          >Italiano</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryES GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="ES"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Spain</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Español"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-ES-es-link"
+                                          data-country-code="ES"
+                                          data-language-code="es"
+                                          data-globalization-active="false"
+                                          data-display-name="Spain (Español)"
+                                          tabindex="-1"
+                                          >Español</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-ES-en-GB-link"
+                                          data-country-code="ES"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Spain (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countrySE GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="SE"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Sweden</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Svenska"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SE-sv-link"
+                                          data-country-code="SE"
+                                          data-language-code="sv"
+                                          data-globalization-active="false"
+                                          data-display-name="Sweden (Svenska)"
+                                          tabindex="-1"
+                                          >Svenska</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-SE-en-GB-link"
+                                          data-country-code="SE"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Sweden (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryCH GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="CH"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Switzerland</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Deutsch"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CH-de-link"
+                                          data-country-code="CH"
+                                          data-language-code="de"
+                                          data-globalization-active="false"
+                                          data-display-name="Switzerland (Deutsch)"
+                                          tabindex="-1"
+                                          >Deutsch</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Français"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CH-fr-link"
+                                          data-country-code="CH"
+                                          data-language-code="fr"
+                                          data-globalization-active="false"
+                                          data-display-name="Switzerland (Français)"
+                                          tabindex="-1"
+                                          >Français</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Italiano"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CH-it-link"
+                                          data-country-code="CH"
+                                          data-language-code="it"
+                                          data-globalization-active="false"
+                                          data-display-name="Switzerland (Italiano)"
+                                          tabindex="-1"
+                                          >Italiano</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-CH-en-GB-link"
+                                          data-country-code="CH"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Switzerland (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryTH GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="TH"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >Thailand</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="ไทย"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-TH-th-link"
+                                          data-country-code="TH"
+                                          data-language-code="th"
+                                          data-globalization-active="false"
+                                          data-display-name="Thailand (ไทย)"
+                                          tabindex="-1"
+                                          >ไทย</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="https://class.com/en-th"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-TH-en-GB-link"
+                                          data-country-code="TH"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="Thailand (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryAE GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="AE"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >United Arab Emirates</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-AE-en-link"
+                                          data-country-code="AE"
+                                          data-language-code="en"
+                                          data-globalization-active="false"
+                                          data-display-name="United Arab Emirates (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryGB GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="GB"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >United Kingdom</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-GB-en-GB-link"
+                                          data-country-code="GB"
+                                          data-language-code="en-GB"
+                                          data-globalization-active="false"
+                                          data-display-name="United Kingdom (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+
+                                  <li
+                                    class="GlobalizationPicker__countryListItem"
+                                  >
+                                    <img
+                                      class="Flag Flag--countryUS GlobalizationPicker__countryFlagIcon"
+                                      src="https://images.ctfassets.net/fzn2n1nzq965/5hEVwGQfvUQhsMjfASiuA/db4e12749695dbf5735787879ae56e96/flagIcons.svg"
+                                      alt="US"
+                                      loading="lazy"
+                                    />
+
+                                    <span class="GlobalizationPicker__country"
+                                      >United States</span
+                                    >
+
+                                    <ul
+                                      class="GlobalizationPicker__countryLanguageList"
+                                    >
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="English"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-US-en-link"
+                                          data-country-code="US"
+                                          data-language-code="en"
+                                          data-globalization-active="false"
+                                          data-display-name="United States (English)"
+                                          tabindex="-1"
+                                          >English</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="Español"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-US-es-419-link"
+                                          data-country-code="US"
+                                          data-language-code="es-419"
+                                          data-globalization-active="false"
+                                          data-display-name="United States (Español)"
+                                          tabindex="-1"
+                                          >Español</a
+                                        >
+                                      </li>
+
+                                      <li
+                                        class="GlobalizationPicker__countryLanguageListItem"
+                                      >
+                                        <a
+                                          class="Link GlobalizationPicker__countryLanguage"
+                                          href="#"
+                                          data-js-controller="AnalyticsButton"
+                                          data-analytics-category="Languages"
+                                          data-analytics-action="Clicked"
+                                          data-analytics-label="简体中文"
+                                          data-js-target-list="LocaleControl.items"
+                                          data-testid="footer-locale-US-zh-CN-link"
+                                          data-country-code="US"
+                                          data-language-code="zh-CN"
+                                          data-globalization-active="false"
+                                          data-display-name="United States (简体中文)"
+                                          tabindex="-1"
+                                          >简体中文</a
+                                        >
+                                      </li>
+                                    </ul>
+                                  </li>
+                                </ul>
+                              </div>
+                            </section>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <section class="List SiteFooterSection__copyright">
+                      <ul class="List__list">
+                        <!-- <li class="List__item ListItem">© 2024 class, Inc.</li> -->
+                      </ul>
+                    </section>
+                  </div>
+
+                
+
+                  
+
+                  <div
+                    class="SiteFooterSection__column SiteFooterSection__column--isMobileFooterLayout"
+                  >
+                    <section class="List List--hasTitle">
+                      <h1
+                        class="CopyTitle CopyTitle--variant CopyTitle--inline List__title"
+                      >
+                      Lorem ipsum dolor
+                      </h1>
+
+                      <ul class="List__list">
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Education"
+                            data-testid="footer-resources-guides-list-item"
+                            >Lorem ipsum dolor</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Customer Stories"
+                            data-testid="footer-resources-customer-stories-list-item"
+                            >Lorem ipsum dolor</a
+                          >
+                        </li>
+                        <!-- <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Blog"
+                            data-testid="footer-resources-blog-list-item"
+                            >Blog</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Sessions Annual Conference"
+                            data-testid="footer-resources-sessions-list-item"
+                            >Annual conference</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="https://class.com/in/privacy"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Legal"
+                            data-testid="footer-resources-privacy-list-item"
+                            >Privacy &amp; terms</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Restricted businesses"
+                            data-testid="footer-resources-restricted-businesses-list-item"
+                            >Prohibited &amp; restricted businesses</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="https://class.com/in/spc/licenses"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Licenses"
+                            data-testid="footer-resources-licenses-list-item"
+                            >Licences</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Sitemap"
+                            data-testid="footer-resources-sitemap-list-item"
+                            >Sitemap</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Cookie settings"
+                            data-testid="footer-resources-cookie-settings-list-item"
+                            >Cookie settings</a
+                          >
+                        </li> -->
+                      </ul>
+                    </section>
+                    <section class="List List--hasTitle">
+                      <!-- <h1
+                        class="CopyTitle CopyTitle--variant CopyTitle--inline List__title"
+                      >
+                        Company
+                      </h1>
+
+                      <ul class="List__list">
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Careers"
+                            data-testid="footer-company-jobs-list-item"
+                            >Jobs</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Newsroom"
+                            data-testid="footer-company-newsroom-list-item"
+                            >Newsroom</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="https://press.class.com/"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="class Press"
+                            data-testid="footer-company-class-press-list-item"
+                            >class Press</a
+                          >
+                        </li>
+                      </ul> -->
+                    </section>
+                    <section
+                      class="List List--hasTitle"
+                      data-js-controller="SiteFooterSectionSupportLinkList"
+                    >
+                      <!-- <h1
+                        class="CopyTitle CopyTitle--variant CopyTitle--inline List__title"
+                      >
+                        Support
+                      </h1> -->
+<!-- 
+                      <ul class="List__list">
+                        <li
+                          class="List__item ListItem"
+                          data-js-target="SiteFooterSectionSupportLinkList.contactSalesItem"
+                        >
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Contact Sales"
+                            data-testid="footer-resources-contact-sales-list-item"
+                            >Contact sales</a
+                          >
+                        </li>
+
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="https://support.class.com/?referrerLocale=en-gb-in"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Support request"
+                            data-testid="footer-resources-support-list-item"
+                            >Support centre</a
+                          >
+                        </li>
+                        <li class="List__item ListItem">
+                          <a
+                            class="Link ListItem__label"
+                            href="#"
+                            data-js-controller="AnalyticsButton"
+                            data-analytics-category="Links"
+                            data-analytics-action="Clicked"
+                            data-analytics-label="Support Plans"
+                            data-testid="footer-resources-support-plans-list-item"
+                            >Support plans</a
+                          >
+                        </li>
+                      </ul> -->
+                    </section>
+                  </div>
+                </nav>
+                <div
+                  class="classSet classSet--TopLeft classSet--layoutIntersecting classSet--alignEnd"
+                  data-js-controller="classSet"
+                  aria-hidden="true"
+                  data-js-align="End"
+                >
+                  <div
+                    class="class class--accentNone class--variantSolid class--insetNone class--widthNormal"
+                    aria-hidden="true"
+                    data-js-target-list="classSet.classs"
+                    style="transform: translateY(-718.5px)"
+                  ></div>
+
+                  <div
+                    class="class class--accentNone class--variantSolid class--insetSmall class--widthFull"
+                    aria-hidden="true"
+                    data-js-target-list="classSet.classs"
+                  ></div>
+
+                  <div
+                    class="class class--accentNone class--variantIntersection class--insetNone class--widthNormal class--intersectionInsetSmall class--intersectionWidthFull"
+                    aria-hidden="true"
+                    data-js-target-list="classSet.classs"
+                    style="transform: translateY(-718.5px)"
+                  >
+                    <div
+                      class="class__intersection"
+                      data-js-target="classSet.intersection"
+                      style="transform: translateY(718.25px)"
+                    ></div>
+                  </div>
+                </div>
+                <div
+                  class="classSet classSet--TopRight classSet--layoutIntersecting classSet--alignCenter"
+                  data-js-controller="classSet"
+                  aria-hidden="true"
+                >
+                  <div
+                    class="class class--accentNone class--variantSolid class--insetSmall class--widthFull"
+                    aria-hidden="true"
+                    data-js-target-list="classSet.classs"
+                  ></div>
+
+                  <div
+                    class="class class--accentNone class--variantSolid class--insetNone class--widthNormal"
+                    aria-hidden="true"
+                    data-js-target-list="classSet.classs"
+                    style="transform: translateY(721px)"
+                  ></div>
+
+                  <div
+                    class="class class--accentNone class--variantIntersection class--insetSmall class--widthFull class--intersectionInsetNone class--intersectionWidthNormal"
+                    aria-hidden="true"
+                    data-js-target-list="classSet.classs"
+                  >
+                    <div
+                      class="class__intersection"
+                      data-js-target="classSet.intersection"
+                      style="transform: translateY(720.75px)"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      <div
+        class="MobileStickyNav theme--Light flavor--Chroma accent--Slate"
+        data-js-controller="MobileStickyNav"
+      >
+        <div
+          class="MobileStickyNav__container"
+          data-js-target="MobileStickyNav.container"
+        >
+          <a
+            class="CtaButton variant--Button CtaButton--arrow"
+            href="./pages/signin.html"
+            data-js-controller="AnalyticsButton"
+            data-analytics-category="Buttons"
+            data-analytics-action="Clicked"
+            data-analytics-label="register_mobile_sticky_nav_cta"
+            >Start now&nbsp;<svg
+              class="HoverArrow"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              aria-hidden="true"
+            >
+              <g fill-rule="evenodd">
+                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+              </g></svg
+          ></a>
+          <a
+            class="CtaButton variant--Link CtaButton--arrow"
+            href="#"
+            data-js-controller="AnalyticsButton"
+            data-analytics-category="Buttons"
+            data-analytics-action="Clicked"
+            data-analytics-label="secondary_mobile_sticky_nav_cta"
+            >Contact sales&nbsp;<svg
+              class="HoverArrow"
+              width="10"
+              height="10"
+              viewBox="0 0 10 10"
+              aria-hidden="true"
+            >
+              <g fill-rule="evenodd">
+                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+              </g></svg
+          ></a>
+        </div>
+      </div>
+    </div>
+    
+  </body>
 </html>
