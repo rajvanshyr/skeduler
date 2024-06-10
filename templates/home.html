@@ -446,7 +446,11 @@
                                 <div class="popup-menu-card">
                                     <button class="close-button" onclick="toggleMenu()">&times;</button>
                                     <a href="#home">Home</a>
-                                    <a href="/Sign-on">Sign in&nbsp;<svg
+                                    {% if current_user.is_authenticated %}
+                                    <a href="/Log-out">Log Out
+                                    {% else %}
+                                    <a href="/Sign-on">Sign in
+                                    {% endif %}&nbsp;<svg
                         class="HoverArrow"
                         width="10"
                         height="10"
@@ -464,7 +468,7 @@
                           ></path>
                         </g></svg
                     ></a>
-                                    <a href="#contact">Profile</a>
+                                    <a href="#">Contact</a>
                                 </div>
                             </div>
 
