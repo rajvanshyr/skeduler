@@ -1,4 +1,4 @@
-const base_url = "http://127.0.0.1:5000";
+const base_url = "https://ancient-sea-71562-8d53f59e0b89.herokuapp.com";
 
 document.addEventListener("DOMContentLoaded", (event) => {
     const signUpButton = document.getElementById("signUp");
@@ -45,7 +45,7 @@ async function SignUp() {
         if (!response.ok) {
             throw new Error(result.error);
         }
-        window.location.href = '/profile';
+        window.location.href = base_url + '/profile';
     } catch (e) {
         console.error(e);
         document.getElementById("error").innerHTML = e;
@@ -82,9 +82,9 @@ async function LogIn() {
         var params = new URLSearchParams(parsedUrl.search);
         if (params.has('next')) {
             var nextValue = params.get('next');
-            window.location.href = nextValue;
+            window.location.href = base_url + nextValue;
         }
-        window.location.href = '/profile';
+        window.location.href = base_url + '/profile';
     } catch (e) {
         console.error(e);
         document.getElementById("login_error").innerHTML = e;
