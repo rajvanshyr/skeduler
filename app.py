@@ -83,6 +83,8 @@ def registration():
 	credit_numbers = data.get('credit_numbers',None)
 	account_created = date.today()
 	try:
+		if not (username and password and email and firstname):
+			raise Exception("Fields cannot be left blank.")
 		user=db.session.query(User).filter(User.username==username).first()
 		if user:
 			raise Exception("Username already exists.")

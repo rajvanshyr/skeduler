@@ -49,6 +49,8 @@ button {
     letter-spacing: 1px;
     text-transform: uppercase;
     transition: transform 80ms ease-in;
+    border-color: #292929;
+    margin-top: 10px;
 }
 
 button:active {
@@ -98,7 +100,7 @@ input {
     overflow: hidden;
     width: 768px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 550px;
 }
 
 .form-container {
@@ -106,6 +108,9 @@ input {
     top: 0;
     height: 100%;
     transition: all 0.6s ease-in-out;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
 }
 
 .sign-in-container {
