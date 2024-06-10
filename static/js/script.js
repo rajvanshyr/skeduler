@@ -45,7 +45,7 @@ async function SignUp() {
         if (!response.ok) {
             throw new Error(result.error);
         }
-        window.location.href = '/';
+        window.location.href = '/profile';
     } catch (e) {
         console.error(e);
         document.getElementById("error").innerHTML = e;
@@ -84,7 +84,7 @@ async function LogIn() {
             var nextValue = params.get('next');
             window.location.href = nextValue;
         }
-        window.location.href = '/';
+        window.location.href = '/profile';
     } catch (e) {
         console.error(e);
         document.getElementById("login_error").innerHTML = e;

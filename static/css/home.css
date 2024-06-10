@@ -3934,7 +3934,7 @@ strong {
 }
 
 .theme--Dark {
-    --backgroundColor: #ff7850;
+    --backgroundColor: #80e9ff;
     --linkColor: var(--accentColor);
     --linkHoverColor: #fff;
     --linkHoverOpacity: 1;
@@ -4209,9 +4209,9 @@ strong {
 }
 
 .flavor--Chroma {
-    --blendBackground: #80e9ff;
+    /* --blendBackground: #80e9ff; */
     --blendIntersection: #0048e5;
-    --blendForeground: #7a73ff;
+    /* --blendForeground: #7a73ff; */
     --gradientColorZero: #a960ee;
     --gradientColorOne: #ff333d;
     --gradientColorTwo: #90e0ff;
